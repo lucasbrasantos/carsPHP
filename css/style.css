@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Lato", sans-serif;
+}
+
+body{
+    height: 100vh;
+    width: 100vw;
+    max-width: 100%;
+    background-color: #f2f2f2;
+}
+
+.container{
+    min-height: 100%;
+    width: 100%;
+    padding: 60px 140px 100px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    /* align-items: center;  */
+}
+
+footer{
+    background: #e2e2e2;
+    color: #626262;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    border-top: 1px solid #dedede;
+    user-select: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#title{
+    text-transform: capitalize;
+}
+
+.navbar{
+    display: flex;
+    flex-direction: row;
+    column-gap: 40px;
+    margin: 20px 0 40px 0;
+    width: 100%;
+}
+
+#search-bar{
+    position: relative;    
+}
+
+.search-icon{
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    transform: translateY(-44%);
+    color: gray;
+}
+
+
+.navbar input, .navbar button{
+    padding: 10px 40px;
+    border-radius: 12px;
+    outline: none;
+    border: none;
+    font-weight: 500;
+    font-size: 1rem;
+    text-transform: capitalize;
+}
+
+.navbar input{
+    border: 1px solid rgba(198,198,198,1);
+}
+
+.navbar button{
+    background: rgb(78, 160, 255);
+    color: white;
+    cursor: pointer;
+}
+
+.navbar button:hover{
+    background: rgb(99, 172, 255);    
+}
+
+.navbar button:active{
+    background: rgb(36, 138, 255);    
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    margin: 0 auto;
+}
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+tr:hover {
+    background-color: #ddd;
+}
+
+.small-column {
+    width: 100px; /* Adjust the width as needed */
+}
+
+
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.carForm label {
+    display: block;
+    font-weight: bold;
+}
+
+.carForm input[type="text"],
+.carForm input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    outline: none;
+    border-radius: 12px;
+}
+
+.addCar, .random-car{
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.addCar {
+    background-color: #4CAF50;
+}
+
+.addCar:hover {
+    background-color: #45a049;
+}
+
+.addCar:active {
+    background-color: #3e8e41;
+}
+
+.random-car{
+    background: #eb8d23;
+}
+
+.random-car:hover{
+    background: #f19c39;
+}
+
+.random-car:active{
+    background: #ce7b1b;
+}
+
+.buttons{
+    display: flex;
+    column-gap: 40px;
+}
+
+.delete-icon{
+    color: rgb(218, 67, 41);
+}
+
+.edit-icon{
+    color: darkslategray;
+    
+}
+
+.edit-icon:hover, .delete-icon:hover{
+    transform: scale(1.1);
+    transition: .1s;
+}
+
