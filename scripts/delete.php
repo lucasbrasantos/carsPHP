@@ -1,25 +1,22 @@
 <?php
 
+require '../includes/connection.php';
+require '../classes/Car.php'; // Adjust the path if necessary
+
 if (isset($_GET["id"])) {
-    
     $carId = $_GET["id"];
-    require '../includes/connection.php';
 
-    $sql = "delete from cars where id = ?";
-    $stmt = $con->prepare($sql);
-    
-    try {
-        $stmt->execute([$carId]);
-    } catch (Exception $e) {
-        echo "erro";
-        header("Location: ../pages/addCarro.html?erroExcluirCarro");
+    // Create an instance of the Car class
+    $car = new Car($pdo);
+
+    // Attempt to delete the car
+    if ($car->deleteCar($carId)) {
+        header("Location: ../pages/index.php?carDeleted");
         exit();
-        
+    } else {
+        header("Location: ../pages/index.php?error=deletion");
+        exit();
     }
-
-    header("Location: ../pages/index.php?carDeleted");
-
 }
-
 
 ?>
