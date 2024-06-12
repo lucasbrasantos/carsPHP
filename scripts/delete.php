@@ -1,7 +1,7 @@
 <?php
 
 require '../includes/connection.php';
-require '../classes/Car.php'; // Adjust the path if necessary
+require '../classes/Car.class.php'; 
 
 if (isset($_GET["id"])) {
     $carId = $_GET["id"];

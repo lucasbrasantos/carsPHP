@@ -3,16 +3,11 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        
+        <title>Carros</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-
         <link rel="stylesheet" href="../css/style.css">
     </head>
     <body>
-        
-        
-
         <header>
             <h1 id="title">carros</h1>
             <div class="navbar">
@@ -24,8 +19,7 @@
                 </div>
                 <button onclick="location.href='../pages/addCarro.html';">+ adicionar</button>
             </div>
-        </header>
-        
+        </header>        
         
         <table>
             <thead>
@@ -35,13 +29,12 @@
                     <th>Cor</th>
                     <th>Ano</th>
                     <th>Preço</th>
-                    <th style="width: 5%">Editar</th>
                     <th style="width: 5%">Apagar</th>
+                    <th style="width: 5%">Editar</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-
                     require '../includes/connection.php';
 
                     try {
@@ -88,7 +81,6 @@
                     } catch(PDOException $e) {
                         echo "Error: " . $e->getMessage();
                     }
-
                 ?>
             </tbody>
         </table>

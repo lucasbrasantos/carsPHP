@@ -2,9 +2,9 @@
 
 if (isset($_POST['submit'])) {
     require '../includes/connection.php';
-    require '../classes/Car.php'; // Se necessário, ajuste o caminho
+    require '../classes/Car.class.php'; 
     
-    // Verifica se todos os campos obrigatórios foram preenchidos
+    // Check if there is no empty fields
     if (!empty($_POST['make']) && !empty($_POST['color']) && !empty($_POST['year']) && !empty($_POST['price'])) {
         $marca = $_POST['make'];
         $cor = $_POST['color'];
@@ -14,17 +14,17 @@ if (isset($_POST['submit'])) {
         // Create an instance of the Car class
         $car = new Car($pdo);
 
-        // Tentativa de criar um novo carro
+        // Attempt to create a car
         if ($car->createCar($marca, $cor, $ano, $preco)) {
             header("Location: ../pages/addCarro.html?success");
             exit();
         } else {
-            // Redireciona com mensagem de erro para produção
+            // Redirect with error message in registration
             header("Location: ../pages/addCarro.html?error=registration");
             exit();
         }
     } else {
-        // Redireciona com mensagem de erro para produção se campos obrigatórios não forem preenchidos
+        // Redirect with error message if there is empty fields
         header("Location: ../pages/addCarro.html?error=empty_fields");
         exit();
     }

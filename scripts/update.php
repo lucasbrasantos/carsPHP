@@ -2,9 +2,9 @@
 
 if (isset($_POST['submit'])) {
     require '../includes/connection.php';
-    require '../classes/Car.php'; // Se necessário, ajuste o caminho
+    require '../classes/Car.class.php'; 
     
-    // Verifica se todos os campos obrigatórios foram preenchidos
+    // Check if there is no empty fields
     if (!empty($_POST['make']) && !empty($_POST['color']) && !empty($_POST['year']) && !empty($_POST['price'])) {
         $carId = $_POST['car_id'];
         $marca = $_POST['make'];
@@ -20,12 +20,12 @@ if (isset($_POST['submit'])) {
             header("Location: ../pages/index.php?carUpdated");
             exit();
         } else {
-            // Redireciona com mensagem de erro para produção
+            // Redirect with error message in update
             header("Location: ../pages/index.php?error=update");
             exit();
         }
     } else {
-        // Redireciona com mensagem de erro para produção se campos obrigatórios não forem preenchidos
+        // Redirect with error message if there is empty fields
         header("Location: ../pages/index.php?error=empty_fields");
         exit();
     }
