@@ -50,5 +50,3 @@ This guide will walk you through the steps to set up and run your project using 
 ## Step 7: Troubleshooting
 
 - If you encounter any issues, check the Apache and MySQL logs for error messages. You can find the logs in the `logs` directory inside the XAMPP installation directory.
-
-```
