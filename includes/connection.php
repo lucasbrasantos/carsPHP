@@ -1,9 +1,10 @@
 <?php
 
-$host = "127.0.0.1";
+$host = '127.0.0.1';
 $port = 3306;
-$user = "root";
-$dbname = "cars_php";
+$user = 'SchemaMaster';
+$password = 'Sch3ma_Ma$ter13!';
+$dbname = 'cars_php';
 
 try {
     $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=utf8mb4";
@@ -17,7 +18,7 @@ try {
     
 } catch (PDOException $e) {
     // Handle connection errors gracefully
-    die("Connection failed: " . $e->getMessage());
+    die('Connection failed: ' . $e->getMessage());
 }
 
 ?>

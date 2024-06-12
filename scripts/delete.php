@@ -1,13 +1,12 @@
 <?php
 
-require '../includes/connection.php';
 require '../classes/Car.class.php'; 
 
 if (isset($_GET["id"])) {
     $carId = $_GET["id"];
 
     // Create an instance of the Car class
-    $car = new Car($pdo);
+    $car = new Car();
 
     // Attempt to delete the car
     if ($car->deleteCar($carId)) {

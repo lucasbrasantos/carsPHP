@@ -13,7 +13,7 @@ if (isset($_POST['submit'])) {
         $preco = $_POST['price'];
 
         // Create an instance of the Car class
-        $car = new Car($pdo);
+        $car = new Car();
 
         // Tentativa de atualizar o carro
         if ($car->updateCar($carId, $marca, $cor, $ano, $preco)) {
