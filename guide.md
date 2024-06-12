@@ -52,5 +52,3 @@ This guide will walk you through the steps to set up and run your project using 
 - If you encounter any issues, check the Apache and MySQL logs for error messages. You can find the logs in the `logs` directory inside the XAMPP installation directory.
 
 ```
-
-Save the above content to a file named `README.md` or any other preferred name with the `.md` extension. This markdown file provides clear instructions on how to set up and run your project using XAMPP.
