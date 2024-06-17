@@ -12,15 +12,14 @@
             <h1 id="title">carros</h1>
             <div class="navbar">
                 <div id="search-bar">
-                    <span class="search-icon material-symbols-outlined">
-                        search
-                    </span>
+                    <span class="search-icon material-symbols-outlined">search</span>
                     <input type="text" placeholder="Procurar">
                 </div>
                 <button onclick="location.href='../pages/addCarro.html';">+ adicionar</button>
+                <button class="delete-all-btn" onclick="location.href='../scripts/deleteAll.php';"><span class="delete-all-icon material-symbols-outlined">delete</span> deletar todos</button>
             </div>
         </header>        
-        
+
         <table>
             <thead>
                 <tr>
@@ -29,6 +28,8 @@
                     <th>Cor</th>
                     <th>Ano</th>
                     <th>Preço</th>
+                    <th>Usado</th>
+                    <th>Adicionais</th>
                     <th style="width: 5%">Apagar</th>
                     <th style="width: 5%">Editar</th>
                 </tr>
@@ -40,9 +41,13 @@
                     try {
                         $sql = "SELECT * FROM cars";
                         $stmt = $pdo->query($sql);
-                        
+
                         if ($stmt->rowCount() > 0) {
                             while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                // Decode the JSON additional features
+                                $adicionais = json_decode($row['adicionais'], true);
+                                $adicionaisFormatted = implode(', ', $adicionais);
+
                                 echo "
                                 <tr>
                                     <td>{$row['id']}</td>
@@ -50,34 +55,32 @@
                                     <td>{$row['cor']}</td>
                                     <td>{$row['ano']}</td>
                                     <td>\${$row['preco']}</td>
+                                    <td>{$row['usado']}</td>
+                                    <td>{$adicionaisFormatted}</td>
                                     <td>
                                         <a href=\"../scripts/delete.php?id={$row['id']}\">
-                                            <span class=\"delete-icon material-symbols-outlined\">
-                                                delete
-                                            </span>
+                                            <span class=\"delete-icon material-symbols-outlined\">delete</span>
                                         </a>
                                     </td>
                                     <td>
-                                        <a href=\"../pages/editCarro.php?id={$row['id']}\">    
-                                            <span class=\"edit-icon material-symbols-outlined\">
-                                                edit
-                                            </span>
+                                        <a href=\"../pages/editCarro.php?id={$row['id']}\">
+                                            <span class=\"edit-icon material-symbols-outlined\">edit</span>
                                         </a>
                                     </td>
                                 </tr>
                                 ";
                             }
                         } else {
-                            // If there are no cars, display a single row with a colspan of 6 containing the message
+                            // If there are no cars, display a single row with a colspan of 9 containing the message
                             echo "
                             <tr>
-                                <td colspan=\"6\">
+                                <td colspan=\"9\">
                                     <h1>Nenhum resultado</h1>
                                 </td>
                             </tr>
                             ";
                         }
-                        
+
                     } catch(PDOException $e) {
                         echo "Error: " . $e->getMessage();
                     }
@@ -88,7 +91,5 @@
         <footer>
             <p>Lucas Braga Santos</p>
         </footer>
-        
-
     </body>
 </html>

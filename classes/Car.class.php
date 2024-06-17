@@ -4,18 +4,19 @@ require "Database.class.php";
 
 class Car extends Database
 {
-  public function createCar(string $marca, string $cor, int $ano, float $preco): bool
-  {
-    $sql = "INSERT INTO cars (marca, cor, ano, preco) VALUES (?, ?, ?, ?)";
-    $stmt = $this->pdo->prepare($sql);
-    try {
-      $stmt->execute([$marca, $cor, $ano, $preco]);
-      return true;
-    } catch (PDOException $e) {
-      // Log detailed error for development
-      error_log("Error in creating car: " . $e->getMessage());
-      return false;
-    }
+  public function createCar(string $marca, string $cor, int $ano, float $preco, string $usado, array $adicionais): bool
+    {
+      $sql = "INSERT INTO cars (marca, cor, ano, preco, usado, adicionais) VALUES (?, ?, ?, ?, ?, ?)";
+      $stmt = $this->pdo->prepare($sql);
+      $adicionaisJSON = json_encode($adicionais);
+      try {
+          $stmt->execute([$marca, $cor, $ano, $preco, $usado, $adicionaisJSON]);
+          return true;
+      } catch (PDOException $e) {
+          // Log detailed error for development
+          error_log("Error in creating car: " . $e->getMessage());
+          return false;
+      }
   }
 
   public function readCar(int $carId): ?array
@@ -32,12 +33,12 @@ class Car extends Database
     }
   }
 
-  public function updateCar(int $carId, string $marca, string $cor, int $ano, float $preco): bool
+  public function updateCar(int $carId, string $marca, string $cor, int $ano, float $preco, string $usado, string $adicionais): bool
   {
-    $sql = "UPDATE cars SET marca = ?, cor = ?, ano = ?, preco = ? WHERE id = ?";
+    $sql = "UPDATE cars SET marca = ?, cor = ?, ano = ?, preco = ?, usado = ?, adicionais = ? WHERE id = ?";
     $stmt = $this->pdo->prepare($sql);
     try {
-      $stmt->execute([$marca, $cor, $ano, $preco, $carId]);
+      $stmt->execute([$marca, $cor, $ano, $preco, $usado, $adicionais, $carId]);
       return true;
     } catch (PDOException $e) {
       // Log detailed error for development
@@ -56,6 +57,20 @@ class Car extends Database
     } catch (PDOException $e) {
       // Log detailed error for development
       error_log("Error in deleting car: " . $e->getMessage());
+      return false;
+    }
+  }
+
+  public function deleteAllCars(): bool
+  {
+    $sql = "DELETE FROM cars";
+    $stmt = $this->pdo->prepare($sql);
+    try {
+      $stmt->execute();
+      return true;
+    } catch (PDOException $e) {
+      // Log detailed error for development
+      error_log("Error in deleting all cars: " . $e->getMessage());
       return false;
     }
   }

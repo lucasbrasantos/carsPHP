@@ -32,6 +32,28 @@
                 <label for="price">Preço:</label>
                 <input type="number" id="price" name="price" min="0" required>
             </div>
+            <div class="form-group radio-checkbox-group">
+                <div class="col1">
+                    <label>Usado:</label>
+                    <div class="items">
+                        <label for="isUsed_sim"><input type="radio" id="isUsed_sim" name="isUsed" value="sim" required> Sim</label>
+                        <label for="isUsed_nao"><input type="radio" id="isUsed_nao" name="isUsed" value="não" required> Não</label>
+                    </div>
+                </div>
+                <div class="col2">
+                    <label>Adicionais:</label>
+                    <div class="items">
+                        <label><input type="checkbox" name="features[]" value="Vidro com insulfilm">Vidro com insulfilm</label>
+                        <label><input type="checkbox" name="features[]" value="Peças originais">Peças originais</label>
+                        <label><input type="checkbox" name="features[]" value="Possui tela touch">Possui tela touch</label>
+                        <label><input type="checkbox" name="features[]" value="Estofado de couro">Estofado de couro</label>
+                        <label><input type="checkbox" name="features[]" value="Airbag">Airbag</label>
+                        <label><input type="checkbox" name="features[]" value="Tração4x4">Tração 4x4</label>
+                        <label><input type="checkbox" name="features[]" value="GPS">GPS</label>
+                    </div>
+                </div>
+            </div>
+            
             <div class="form-group buttons">
                 <input type="submit" name="submit" class="addCar">
                 <input type="button" onclick="generateRandomCar()" name="randomCar" class="random-car" value="Gerar carro aleatório">
@@ -46,22 +68,43 @@
             function generateRandomCar() {
                 // Array of possible car makes
                 const carMakes = ['Toyota', 'Honda', 'Ford', 'Chevrolet', 'BMW', 'Mercedes-Benz'];
-    
+                
                 // Array of possible car colors
                 const carColors = ['Red', 'Blue', 'Green', 'White', 'Black', 'Silver'];
-    
+                
+                // Array of possible used status
+                const usedStatus = ['sim', 'não'];
+                
+                // Array of possible car features
+                const carFeatures = ['Vidro com insulfilm', 'Peças originais', 'Possui tela touch', 'Estofado de couro', 'Airbag', 'Tração 4x4', 'GPS'];
+                
                 // Generate random car data
                 const randomMake = carMakes[Math.floor(Math.random() * carMakes.length)];
                 const randomColor = carColors[Math.floor(Math.random() * carColors.length)];
                 const randomYear = Math.floor(Math.random() * (2099 - 1900 + 1)) + 1900; // Random year between 1900 and 2099
                 const randomPrice = Math.floor(Math.random() * 100000); // Random price up to 100,000
-    
+
+                const randomUsedStatus = usedStatus[Math.floor(Math.random() * usedStatus.length)];
+                
+                // Generate random car features (random subset of carFeatures)
+                const randomFeatures = carFeatures.filter(() => Math.random() < 0.5);
+                
                 // Set random data to form fields
                 document.getElementById('make').value = randomMake;
                 document.getElementById('color').value = randomColor;
                 document.getElementById('year').value = randomYear;
                 document.getElementById('price').value = randomPrice;
+
+                // Set the used status radio button
+                document.getElementById('isUsed_sim').checked = randomUsedStatus === 'sim';
+                document.getElementById('isUsed_nao').checked = randomUsedStatus === 'não';
+                
+                // Set the additional features checkboxes
+                document.querySelectorAll('input[name="features[]"]').forEach(checkbox => {
+                    checkbox.checked = randomFeatures.includes(checkbox.value);
+                });
             }
+
         </script>
     </body>
 </html>
