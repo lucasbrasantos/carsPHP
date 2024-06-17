@@ -9,7 +9,7 @@
 }
 
 body{
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
     max-width: 100%;
     padding: 60px 140px 100px;
@@ -86,6 +86,22 @@ footer{
 .navbar button:active{
     background: rgb(36, 138, 255);    
 }
+
+.navbar .delete-all-btn{
+    background: rgb(218, 67, 41);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar .delete-all-btn:hover{
+    background: rgb(255, 122, 99);    
+}
+
+.navbar .delete-all-btn:active{
+    background: rgb(204, 20, 20);    
+}
+
 
 table {
     width: 100%;
@@ -188,5 +204,39 @@ tr:hover {
 .edit-icon:hover, .delete-icon:hover{
     transform: scale(1.1);
     transition: .1s;
+}
+
+.radio-checkbox-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.radio-checkbox-group input[type="radio"] {
+    margin-right: 10px;
+}
+
+.radio-checkbox-group {
+    display: flex;
+    justify-content: start;
+    margin-bottom: 10px;
+    gap: 0 50px;
+}
+
+.radio-checkbox-group .col2{
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+}
+
+.radio-checkbox-group .items input{
+    margin-right: 10px;
+}
+
+.radio-checkbox-group .col2 .items{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    max-height: 50px;
+    gap: 0 10px;
 }
 
