@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Carros</title>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-        <link rel="stylesheet" href="../css/style.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carros</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="../css/style.css">
+</head>
     <body>
         <header>
             <h1 id="title">carros</h1>
             <div class="navbar">
                 <div id="search-bar">
-                    <span class="search-icon material-symbols-outlined">search</span>
-                    <input type="text" placeholder="Procurar">
+                    <form method="get" style="display: flex; align-items: center;">
+                        <span class="search-icon material-symbols-outlined">search</span>
+                        <input type="text" name="query" placeholder="Procurar" value="<?php echo isset($_GET['query']) ? htmlspecialchars($_GET['query']) : ''; ?>">
+                        <button type="submit" style="display:none;"></button>
+                    </form>
                 </div>
                 <button onclick="location.href='../pages/addCarro.html';">+ adicionar</button>
                 <button class="delete-all-btn" onclick="location.href='../scripts/deleteAll.php';"><span class="delete-all-icon material-symbols-outlined">delete</span> deletar todos</button>
@@ -38,9 +41,19 @@
                 <?php
                     require '../includes/connection.php';
 
+                    $query = isset($_GET['query']) ? $_GET['query'] : '';
+                    $sql = "SELECT * FROM cars";
+                    if (!empty($query)) {
+                        $sql .= " WHERE marca LIKE :query OR cor LIKE :query";
+                    }
+
                     try {
-                        $sql = "SELECT * FROM cars";
-                        $stmt = $pdo->query($sql);
+                        $stmt = $pdo->prepare($sql);
+                        if (!empty($query)) {
+                            $search_query = "%$query%";
+                            $stmt->bindParam(':query', $search_query);
+                        }
+                        $stmt->execute();
 
                         if ($stmt->rowCount() > 0) {
                             while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
